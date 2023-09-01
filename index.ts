@@ -1,6 +1,6 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import { ArrayReplaceMultp } from './helper';
+
 
 // 定义全局原过滤字段数组
 const rawData: String[][] = [[], []]
@@ -62,7 +62,7 @@ export async function refresh(data: String | String[]): Promise<Status> {
 
     return {
         code: code,
-        msg: msg
+        msg: msg === '' ? '[Successful processing]' : msg
     }
 }
 
@@ -74,7 +74,3 @@ export function getPercent() {
 
 
 
-
-
-refresh('今天我非常快乐, 好惨，有个傻逼骂我，最近一直在写程序，周末过的很愉快').then(status => console.log(status))
-// ArrayReplaceMultp(rawData[0].join('、'))
