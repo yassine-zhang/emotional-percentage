@@ -2,7 +2,7 @@
   "name": "emotional-percentage",
   "version": "1.1.1",
   "description": "Percentage of positive and negative emotions",
-  "main": "index.ts",
+  "main": "./lib/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
