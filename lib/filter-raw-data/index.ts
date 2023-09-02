@@ -1,1 +1,1 @@
-export { ArrayReplaceMultp } from './array-string'
+export { arrayReplaceMultp } from './array-string'

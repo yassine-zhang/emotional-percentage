@@ -1,18 +1,18 @@
 import * as console from '../log/index.ts'
 
-function StringToArray(data: String, char: string): Array<string> {
+function stringToArray(data: String, char: string): Array<string> {
     return data.split(char)
 }
 
-export function ArrayReplaceMultp(data: String) {
-    let _data = StringToArray(data, '、')
+export function arrayReplaceMultp(data: String) {
+    let _data = stringToArray(data, '、')
     _data = _data.filter(function(item, index, arr) {
         return arr.indexOf(item) === index
     })
-    let lastData = ArrayToString(_data, '、')
+    let lastData = arrayToString(_data, '、')
     console.log(lastData)
 }
 
-function ArrayToString(data: String[], char: string): String {
+function arrayToString(data: String[], char: string): String {
     return data.join(char)
 }
