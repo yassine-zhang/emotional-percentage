@@ -1,3 +1,5 @@
+import * as console from '../log/index.ts'
+
 function StringToArray(data: String, char: string): Array<string> {
     return data.split(char)
 }

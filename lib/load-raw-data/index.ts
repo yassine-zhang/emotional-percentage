@@ -11,8 +11,8 @@
 import * as fs from 'fs-extra';
 import { resolve } from 'path';
 import * as console from '../log/index.ts'
+import { rawData } from '../variables/index.ts'
 
-const rawData: String[][] = [[], []]
 
 interface Loaded {
     rawData: String[][];
@@ -24,6 +24,10 @@ export interface PathOrUrlRole {
 }
 
 function checkPathIsExist(path: PathOrUrlRole): PathOrUrlRole {
+    if (path === undefined) path = {
+        positive: '',
+        negative: ''
+    }
     if (path.positive === '') path.positive = '../../diff_res/正面情绪词汇收集.txt'
     if (path.negative === '') path.negative = '../../diff_res/负面情绪词汇收集.txt'
 
@@ -36,12 +40,12 @@ async function _loadRawData(path: PathOrUrlRole, callback_function?: Function): 
     let result = '', msg = ''
     
     try {
-        result = fs.readFileSync(resolve(__dirname, path.positive), 'utf-8')
+        result = fs.readFileSync(resolve(__dirname, path.negative), 'utf-8')
     } catch (error) { msg += error += '\n' }
     rawData[0] = result.split('、')
 
     try {
-        result = fs.readFileSync(resolve(__dirname, path.negative), 'utf-8')
+        result = fs.readFileSync(resolve(__dirname, path.positive), 'utf-8')
     } catch (error) { msg += error += '\n' }
     rawData[1] = result.split('、')
 
@@ -53,7 +57,7 @@ async function _loadRawData(path: PathOrUrlRole, callback_function?: Function): 
     }
 }
 
-export async function loadRawData(path: PathOrUrlRole, callback_function?: Function): Promise<Loaded> {
+export async function loadRawData(path?: PathOrUrlRole, callback_function?: Function): Promise<Loaded> {
     // 因为就算异步读取较小的文件也是非常快的，我这里加了等待定时100ms为了方便测试
     await setTimeout(() => {}, 100)
     
@@ -61,15 +65,15 @@ export async function loadRawData(path: PathOrUrlRole, callback_function?: Funct
 }
 
 
-export function loadRawDataSync(path: PathOrUrlRole) {
+export function loadRawDataSync(path?: PathOrUrlRole) {
     path = checkPathIsExist(path)
 
     let result = '', msg = '[Successful processing]'
 
-    result = fs.readFileSync(resolve(__dirname, path.positive), 'utf-8')
+    result = fs.readFileSync(resolve(__dirname, path.negative), 'utf-8')
     rawData[0] = result.split('、')
 
-    result = fs.readFileSync(resolve(__dirname, path.negative), 'utf-8')
+    result = fs.readFileSync(resolve(__dirname, path.positive), 'utf-8')
     rawData[1] = result.split('、')
 
     return {

@@ -1,0 +1,1 @@
+export { ArrayReplaceMultp } from './array-string'
