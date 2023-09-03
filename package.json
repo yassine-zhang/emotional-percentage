@@ -1,6 +1,6 @@
 {
   "name": "emotional-percentage",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Percentage of positive and negative emotions",
   "main": "./lib/index.ts",
   "scripts": {
